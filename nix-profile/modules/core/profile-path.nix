@@ -3,21 +3,19 @@
 with lib;
 
 let
-  profile = import ../../lib/build-profile.nix {
+  profile-path = import ../../lib/build-profile.nix {
     inherit (pkgs) writeText system;
     name = "nix-profile";
-    packages = config.unwrappedPackages;
+    packages = config.profilePackages;
   };
 in {
   options = {
-    unwrappedPackages = mkOption {
+    profilePackages = mkOption {
       type = types.listOf types.package;
       default = [];
       example = literalExample "[ pkgs.firefox pkgs.thunderbird ]";
       description = ''
-        The set of packages installed in your profile. The name is
-        a slight misnomer, seeing as this is also where your wrapped
-        packages end up in the end.
+        The set of packages installed in your profile.
       '';
     };
     profile.path = mkOption {
@@ -28,6 +26,6 @@ in {
     };
   };
   config = {
-    profile.path = profile;
+    profile.path = profile-path;
   };
 }

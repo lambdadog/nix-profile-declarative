@@ -12,11 +12,14 @@ let
     baseModules =
       (import ./modules/module-list.nix)
       ++ [
+        # These are impossible to remove due to eval-config requiring
+        # misc/nixpkgs and misc/nixpkgs requiring misc/assertions
         (nixpkgs + /nixos/modules/misc/nixpkgs.nix)
         (nixpkgs + /nixos/modules/misc/assertions.nix)
       ];
 
-    # override NIXOS_EXTRA_MODULE_PATH
+    # If you don't set this, eval-config will read from the
+    # NIXOS_EXTRA_MODULE_PATH environmental variable
     extraModules = [];
 
     modules = [ configuration ];
@@ -24,5 +27,5 @@ let
 in {
   inherit (eval) pkgs config options;
 
-  system = eval.config.profile.build.toplevel;
+  profile = eval.config.profile.build.toplevel;
 }
