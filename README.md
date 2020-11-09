@@ -3,7 +3,9 @@
 A tool for managing your Nix user profile declaratively. Normally
 one's Nix profile is managed with tools like `nix-env`, which is
 antithetical to the kind of beliefs which lead one to using tools like
-Nix and NixOS in the first place.
+Nix and NixOS in the first place, being a fundamentally imperative
+process rather than the declarative one that Nix and NixOS otherwise
+champion.
 
 Instead, `nix-profile-declarative` aims to have you manage your
 profile similar to the way you configure NixOS -- by editing the
