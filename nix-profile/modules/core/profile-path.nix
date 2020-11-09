@@ -13,6 +13,7 @@ in {
     profilePackages = mkOption {
       type = types.listOf types.package;
       default = [];
+      defaultText = literalExample "[]";
       example = literalExample "[ pkgs.firefox pkgs.thunderbird ]";
       description = ''
         The set of packages installed in your profile.

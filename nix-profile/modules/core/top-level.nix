@@ -4,7 +4,7 @@ with lib;
 
 let
   switch-to-profile = pkgs.writeShellScript "switch-to-profile" ''
-    nix-env --set @out@/profile
+    nix-env --set ${config.profile.path}
   '';
   profile = pkgs.runCommand "nix-profile" {} ''
     mkdir -p $out
@@ -12,7 +12,6 @@ let
 
     mkdir -p $out/bin/
     cp ${switch-to-profile} $out/bin/switch-to-profile
-    substituteInPlace $out/bin/switch-to-profile --subst-var out
   '';
 in {
   options = {
