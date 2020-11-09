@@ -3,7 +3,7 @@
 with lib;
 
 let
-  cfg = config.packages.emacs;
+  cfg = config.programs.emacs;
 
   emacsWrapped =
     let
@@ -83,7 +83,7 @@ let
     '';
 in {
   options = {
-    packages.emacs = {
+    programs.emacs = {
       enable = mkEnableOption "emacs";
 
       package = mkOption {
