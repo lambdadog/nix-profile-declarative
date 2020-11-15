@@ -5,10 +5,9 @@ with lib;
 let
   cfg = config.programs.emacs;
 
-  emacsWithPackages = (pkgs.emacsPackagesFor cfg.package).emacsWithPackages;
-
   emacsWrapped =
     let
+      emacsWithPackages = (pkgs.emacsPackagesFor cfg.package).emacsWithPackages;
       emacs = emacsWithPackages cfg.emacsPackages;
       configFile =
         if builtins.isPath cfg.config
