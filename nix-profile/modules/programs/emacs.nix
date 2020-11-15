@@ -30,7 +30,7 @@ let
 		      		    t))
             (load autoload nil t t)))
       '';
-    in pkgs.runCommand "emacs-with-config" {
+    in pkgs.runCommand "${cfg.package.pname}-with-config-${cfg.package.version}" {
       nativeBuildInputs = [ pkgs.makeWrapper emacs ];
     } ''
       ${if builtins.isBool configFile && configFile then ''
