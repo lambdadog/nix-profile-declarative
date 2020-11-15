@@ -36,7 +36,7 @@ let
           # See if derivation is a directory or not
           configFile=$(test -d ${cfg.config} \
             && echo ${cfg.config}/init.el \
-            || echo ${cfg.config}
+            || echo ${cfg.config})
         '' else ''
           configFile=${configFile}
         ''}
