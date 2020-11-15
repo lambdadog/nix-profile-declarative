@@ -86,14 +86,6 @@ in {
     programs.emacs = {
       enable = mkEnableOption "emacs";
 
-      package = mkOption {
-        type = types.package;
-        default = pkgs.emacs;
-        defaultText = literalExample "pkgs.emacs";
-        example = literalExample "pkgs.emacs27-nox";
-        description = "The Emacs package to use.";
-      };
-
       emacsPackages = mkOption {
         # TODO: Make typeable
         # type = types.function;
