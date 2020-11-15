@@ -19,14 +19,8 @@ in {
         The set of packages installed in your profile.
       '';
     };
-    profile.path = mkOption {
-      internal = true;
-      description = ''
-        The packages you want in the nix profile.
-      '';
-    };
   };
   config = {
-    profile.path = profile-path;
+    profile.build.path = profile-path;
   };
 }

@@ -4,11 +4,11 @@ with lib;
 
 let
   switch-to-profile = pkgs.writeShellScript "switch-to-profile" ''
-    nix-env --set ${config.profile.path}
+    nix-env --set ${config.profile.build.path}
   '';
   profile = pkgs.runCommand "nix-profile" {} ''
     mkdir -p $out
-    ln -s ${config.profile.path} $out/profile
+    ln -s ${config.profile.build.path} $out/profile
 
     mkdir -p $out/bin/
     cp ${switch-to-profile} $out/bin/switch-to-profile
