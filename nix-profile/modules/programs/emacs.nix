@@ -5,9 +5,11 @@ with lib;
 let
   cfg = config.programs.emacs;
 
+  emacsWithPackages = (pkgs.emacsPackagesFor cfg.package).emacsWithPackages;
+
   emacsWrapped =
     let
-      emacs = pkgs.emacsWithPackages cfg.emacsPackages;
+      emacs = emacsWithPackages cfg.emacsPackages;
       configFile =
         if builtins.isPath cfg.config
         then if pathIsDirectory cfg.config
@@ -85,6 +87,14 @@ in {
   options = {
     programs.emacs = {
       enable = mkEnableOption "emacs";
+
+      package = mkOption {
+        type = types.package;
+        default = pkgs.emacs;
+        defaultText = literalExample "pkgs.emacs";
+        example = literalExample "pkgs.emacs27-nox";
+        description = "The Emacs package to use.";
+      };
 
       emacsPackages = mkOption {
         # TODO: Make typeable
