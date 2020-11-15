@@ -5,6 +5,7 @@ with lib;
 let
   profile-path = import ../../lib/build-profile.nix {
     inherit (pkgs) writeText system;
+    inherit (config.profile) static;
     name = "nix-profile";
     packages = config.profilePackages;
   };
@@ -17,6 +18,17 @@ in {
       example = literalExample "[ pkgs.firefox pkgs.thunderbird ]";
       description = ''
         The set of packages installed in your profile.
+      '';
+    };
+
+    profile.static = mkOption {
+      type = types.bool;
+      default = false;
+      defaultText = literalExample "false";
+      example = literalExample "true";
+      description = ''
+        Whether to disallow imperative modification of the nix profile
+        with nix-env.
       '';
     };
   };

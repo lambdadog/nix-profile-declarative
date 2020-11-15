@@ -1,10 +1,9 @@
 { writeText, system
-
 , name
 , # A list of packages to install
   packages
 , # Whether to make the nix-profile immutable
-  static ? false
+  static
 }:
 
 let
