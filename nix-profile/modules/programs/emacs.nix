@@ -26,8 +26,8 @@ let
         ;; -*- lexical-binding: t -*-
         (dolist (dir load-path)
           (dolist (autoload (file-expand-wildcards
-                  (expand-file-name "*-autoloads.el" dir)
-		      		    t))
+                    (expand-file-name "*-autoloads.el" dir)
+                    t))
             (load autoload nil t t)))
       '';
     in pkgs.runCommand "${cfg.package.pname}-with-config-${cfg.package.version}" {
