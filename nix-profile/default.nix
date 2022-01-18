@@ -4,6 +4,7 @@
 }:
 
 let
+  # Awkward hack to allow callPackage-ing
   nixpkgsPath =
     if isNull pkgs
     then <nixpkgs>
