@@ -11,7 +11,7 @@ let
   };
 in {
   options = {
-    profilePackages = mkOption {
+    packages = mkOption {
       type = types.listOf types.package;
       default = [];
       defaultText = literalExample "[]";

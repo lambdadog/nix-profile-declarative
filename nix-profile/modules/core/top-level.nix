@@ -6,7 +6,7 @@ let
   switch-to-profile = pkgs.writeShellScript "switch-to-profile" ''
     nix-env --set ${config.profile.build.path}
   '';
-  profile = pkgs.runCommand "nix-profile" {} ''
+  profile-closure = pkgs.runCommand "nix-profile" {} ''
     mkdir -p $out
     ln -s ${config.profile.build.path} $out/profile
 
@@ -25,6 +25,6 @@ in {
     };
   };
   config = {
-    profile.build.toplevel = profile;
+    profile.build.toplevel = profile-closure;
   };
 }
