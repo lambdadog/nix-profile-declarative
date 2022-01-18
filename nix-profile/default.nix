@@ -1,10 +1,15 @@
-{ nixpkgs ? <nixpkgs>
+{ pkgs ? null
 , system ? builtins.currentSystem
 , configuration ? <nix-profile-config>
 }:
 
 let
-  eval = import (nixpkgs + /nixos/lib/eval-config.nix) {
+  nixpkgsPath =
+    if isNull pkgs
+    then <nixpkgs>
+    else pkgs.path;
+
+  eval = import (nixpkgsPath + /nixos/lib/eval-config.nix) {
     inherit system;
 
     # Use our own base modules instead of NixOS's, this is where all of
@@ -14,12 +19,13 @@ let
       ++ [
         # These are impossible to remove due to eval-config requiring
         # misc/nixpkgs and misc/nixpkgs requiring misc/assertions
-        (nixpkgs + /nixos/modules/misc/nixpkgs.nix)
-        (nixpkgs + /nixos/modules/misc/assertions.nix)
+        # unless I want to reimplement `_module.args.pkgs`.
+        (nixpkgsPath + /nixos/modules/misc/nixpkgs.nix)
+        (nixpkgsPath + /nixos/modules/misc/assertions.nix)
       ];
 
     # If you don't set this, eval-config will read from the
-    # NIXOS_EXTRA_MODULE_PATH environmental variable
+    # NIXOS_EXTRA_MODULE_PATH environmental variable.
     extraModules = [];
 
     modules = [ configuration ];
