@@ -6,8 +6,8 @@ let
   profile-path = import ../../lib/build-profile.nix {
     inherit (pkgs) writeText system;
     inherit (config.profile) static;
+    inherit (config) packages;
     name = "nix-profile";
-    packages = config.profilePackages;
   };
 in {
   options = {
