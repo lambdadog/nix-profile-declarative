@@ -28,6 +28,12 @@ let
     # NIXOS_EXTRA_MODULE_PATH environmental variable.
     extraModules = [];
 
+    # eval-config.nix automatically sets this to
+    # <nixpkgs/nixos/modules> so we need to overwrite it.
+    specialArgs = {
+      modulesPath = builtins.toString ./modules;
+    };
+
     modules = [ configuration ];
   };
 in {
