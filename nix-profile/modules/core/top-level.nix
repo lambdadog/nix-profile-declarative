@@ -4,6 +4,8 @@ with lib;
 
 let
   switch-to-profile = pkgs.writeShellScript "switch-to-profile" ''
+    ${concatStringsSep "\n\n" config.profile.build.onSwitch}
+
     nix-env --set ${config.profile.build.path}
   '';
   profile-closure = pkgs.runCommand "nix-profile" {} ''
