@@ -19,9 +19,10 @@ let
       (import ./modules/module-list.nix)
       ++ [
         # These are impossible to remove due to eval-config requiring
-        # misc/nixpkgs and misc/nixpkgs requiring misc/assertions
+        # misc/nixpkgs and misc/nixpkgs requiring misc/assertions+meta
         # unless I want to reimplement `_module.args.pkgs`.
         (nixpkgsPath + /nixos/modules/misc/nixpkgs.nix)
+        (nixpkgsPath + /nixos/modules/misc/meta.nix)
         (nixpkgsPath + /nixos/modules/misc/assertions.nix)
       ];
 
